@@ -9,8 +9,8 @@ module.exports = function(context) {
 
  	var packageName = cfg.packageName();
  	var androidJSON = JSON.parse(fs.readFileSync(context.opts.projectRoot + '/plugins/android.json'));
- 	console.log(androidJSON);
- 	var alipayPath = context.opts.projectRoot + '/platforms/android/com/nova/cordova/alipay';
+ 	console.log(androidJSON.installed_plugins["com.nova.cordova.alipay"].PARTNER);
+ 	var alipayPath = context.opts.projectRoot + '/platforms/android/src/com/nova/cordova/alipay';
  	var alipayKeysPath = alipayPath + '/Keys.java';
 
  	fs.readFile(context.opts.projectRoot + '/plugins/com.nova.cordova.alipay/src/android/com/nova/cordova/alipay/Keys.java', 'utf8', function(err, data) {
