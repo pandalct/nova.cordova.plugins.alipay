@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin id="com.nova.cordova.alipay" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>alipay</name>
+    <description>alipay</description>
+    <!-- add this to your config.xml -->
+    <!-- <preference name="WECHATAPPID" value="YOUR_WECHAT_APP_ID_HERE" /> -->
+    <preference name="PARTNER" />
+    <preference name="SELLER" />
+    <preference name="PRIVATE" />
+    <preference name="PUBLIC" />
+
+    <!--require cordova version -->
+    <engines>
+        <engine name="cordova" version=">=3.5.0" />
+    </engines>
+    <js-module src="www/alipay.js" name="alipay">
+        <clobbers target="alipay" />
+    </js-module>
+    <platform name="android">
+        <hook type="after_plugin_install" src="scripts/android_after_plugin_install.js" />
+        <config-file target="config.xml" parent="/*">
+            <feature name="Pgalipay">
+                <param name="android-package" value="com.nova.cordova.alipay.Pgalipay" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            
+            <!-- alipay sdk end -->
+        </config-file>
+        <!-- Plugin Source -->
+        <source-file src="www/alipay.js" target-dir="src/assets" />
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <!-- alipay sdk begin -->
+            <activity android:name="com.alipay.sdk.app.H5PayActivity" android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:screenOrientation="behind">
+            </activity>
+            <activity android:name="com.alipay.sdk.auth.AuthActivity" android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:screenOrientation="behind">
+            </activity>
+        </config-file>
+        <!-- alipay Libs -->
+        <lib-file src="src/android/alipay/libs/alipaySdk-20151112.jar" />
+        <!-- alipay Sources -->
+        <source-file src="src/android/com/nova/cordova/alipay/Base64.java" target-dir="src/com/nova/cordova/alipay" />
+        <source-file src="src/android/com/nova/cordova/alipay/Keys.java" target-dir="src/com/nova/cordova/alipay" />
+        <source-file src="src/android/com/nova/cordova/alipay/Pgalipay.java" target-dir="src/com/nova/cordova/alipay" />
+        <source-file src="src/android/com/nova/cordova/alipay/Result.java" target-dir="src/com/nova/cordova/alipay" />
+        <source-file src="src/android/com/nova/cordova/alipay/SignUtils.java" target-dir="src/com/nova/cordova/alipay" />
+        
+    </platform>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="alipay">
+                <param name="ios-package" value="alipay" />
+            </feature>
+            <preference name="alipayAPPKEY" value="$alipay_IOS_APPKEY" />
+            <preference name="WECHATAPPID" value="$WECHATAPPID" />
+            <preference name="WECHATAPPSECRET" value="$WECHATAPPSECRET" />
+            <preference name="QQAPPID" value="$QQAPPID" />
+            <preference name="QQAPPKEY" value="$QQAPPKEY" />
+            <preference name="QQURLSCHEME" value="$QQURLSCHEME" />
+            <preference name="WBAPPKEY" value="$WBAPPKEY" />
+            <preference name="WBAPPSECRET" value="$WBAPPSECRET" />
+            <preference name="WBREDIRECTURL" value="$WBREDIRECTURL" />
+        </config-file>
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLName</key>
+                    <string></string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>$WECHATAPPID</string>
+                    </array>
+                </dict>
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLName</key>
+                    <string></string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>wb$WBAPPKEY</string>
+                    </array>
+                </dict>
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLName</key>
+                    <string></string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>tencent$QQAPPID</string>
+                    </array>
+                </dict>
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLName</key>
+                    <string></string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>$QQURLSCHEME</string>
+                    </array>
+                </dict>
+            </array>
+        </config-file>
+        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+            <array>
+                <string>weixin</string>
+                <string>wechat</string>
+                <string>mqqOpensdkSSoLogin</string>
+                <string>mqqopensdkapiV2</string>
+                <string>mqqopensdkapiV3</string>
+                <string>wtloginmqq2</string>
+                <string>mqq</string>
+                <string>mqqapi</string>
+                <string>mqzoneopensdk</string>
+                <string>mqzoneopensdkapi</string>
+                <string>mqzoneopensdkapi19</string>
+                <string>mqqwpa</string>
+                <string>mqzone</string>
+                <string>sinaweibo</string>
+                <string>sinaweibohd</string>
+                <string>sinaweibosso</string>
+                <string>sinaweibohdsso</string>
+                <string>weibosdk</string>
+                <string>weibosdk2.5</string>
+            </array>
+        </config-file>
+        <header-file src="src/ios/alipay.h" />
+        <source-file src="src/ios/alipay.m" />
+        <!-- Other required frameworks -->
+        <framework src="libz.1.2.5.dylib" />
+        <framework src="MessageUI.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="Security.framework" />
+        <framework src="libstdc++.dylib" />
+        <framework src="QuartzCore.framework" />
+        <framework src="CoreTelephony.framework" />
+        <framework src="libicucore.dylib" />
+        <framework src="JavaScriptCore.framework" />
+        <framework src="CoreText.framework" />
+        <framework src="libsqlite3.dylib" />
+        <framework src="ImageIO.framework" />
+        <!-- Wechat Official -->
+        <header-file src="src/ios/alipay/Extend/WeChatSDK/WXApi.h" />
+        <header-file src="src/ios/alipay/Extend/WeChatSDK/WXApiObject.h" />
+        <source-file src="src/ios/alipay/Extend/WeChatSDK/libWeChatSDK.a" framework="true" />
+        <resource-file src="src/ios/alipay/Extend/QQConnectSDK/TencentOpenApi_IOS_Bundle.bundle" />
+        <!-- Sina Official -->
+        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WeiboSDK.h" />
+        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WeiboUser.h" />
+        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WeiboSDK+Statistics.h" />
+        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBSDKRelationshipButton.h" />
+        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBSDKCommentButton.h" />
+        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBSDKBasicButton.h" />
+        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBHttpRequest.h" />
+        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBHttpRequest+WeiboUser.h" />
+        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBHttpRequest+WeiboToken.h" />
+        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBHttpRequest+WeiboShare.h" />
+        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBHttpRequest+WeiboGame.h" />
+        <source-file src="src/ios/alipay/Extend/SinaWeiboSDK/libWeiboSDK.a" framework="true" />
+        <resource-file src="src/ios/alipay/Extend/SinaWeiboSDK/WeiboSDK.bundle" />
+        <!-- alipay -->
+        <framework src="src/ios/alipay/alipay.framework" custom="true" />
+        <framework src="src/ios/alipay/Connection/QQConnection.framework" custom="true" />
+        <framework src="src/ios/alipay/Connection/QZoneConnection.framework" custom="true" />
+        <framework src="src/ios/alipay/Connection/SinaWeiboConnection.framework" custom="true" />
+        <framework src="src/ios/alipay/Connection/WeChatConnection.framework" custom="true" />
+        <framework src="src/ios/alipay/Core/alipayCoreService.framework" custom="true" />
+        <framework src="src/ios/alipay/Core/AGCommon.framework" custom="true" />
+        <framework src="src/ios/alipay/Core/MOBFoundation.framework" custom="true" />
+        <resource-file src="src/ios/alipay/UI/alipayFlatShareViewUI.bundle" />
+        <resource-file src="src/ios/alipay/Core/zh-Hans.lproj/alipayLocalizable.strings" />
+        <resource-file src="src/ios/alipay/Core/Resource.bundle" />
+        <framework src="src/ios/alipay/UI/alipayShareActionSheet.framework" custom="true" />
+        <framework src="src/ios/alipay/UI/alipayFlatShareViewUI.framework" custom="true" />
+        <framework src="src/ios/alipay/Extend/QQConnectSDK/TencentOpenAPI.framework" custom="true" />
+    </platform>
+</plugin>
