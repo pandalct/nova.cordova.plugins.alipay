@@ -34,7 +34,7 @@
             <!-- alipay sdk end -->
         </config-file>
         <!-- Plugin Source -->
-        <source-file src="www/alipay.js" target-dir="src/assets" />
+        <source-file src="www/pgalipay.js" target-dir="src/assets" />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <!-- alipay sdk begin -->
             <activity android:name="com.alipay.sdk.app.H5PayActivity" android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:screenOrientation="behind">
