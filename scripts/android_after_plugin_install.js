@@ -15,9 +15,9 @@ module.exports = function(context) {
  	fs.readFile(context.opts.projectRoot + '/plugins/com.nova.cordova.alipay/src/android/com/nova/cordova/alipay/Keys.java', 'utf8', function(err, data) {
  		if(err) throw err;
  		var result = data.replace(/\$PARTNER/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].PARTNER);
- 		result = data.replace(/\$SELLER/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].SELLER);
- 		result = data.replace(/\$PRIVATE/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].PRIVATE);
- 		result = data.replace(/\$PUBLIC/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].PUBLIC);
+ 		result = result.replace(/\$SELLER/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].SELLER);
+ 		result = result.replace(/\$PRIVATE/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].PRIVATE);
+ 		result = result.replace(/\$PUBLIC/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].PUBLIC);
  		fs.exists(alipayPath, function(exists) {
  			if(!exists) fs.mkdir(alipayPath);
  			
