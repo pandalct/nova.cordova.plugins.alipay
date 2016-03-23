@@ -46,7 +46,6 @@
         <lib-file src="src/android/alipay/libs/alipaySdk-20151112.jar" />
         <!-- alipay Sources -->
         <source-file src="src/android/com/nova/cordova/alipay/Base64.java" target-dir="src/com/nova/cordova/alipay" />
-        <source-file src="src/android/com/nova/cordova/alipay/Keys.java" target-dir="src/com/nova/cordova/alipay" />
         <source-file src="src/android/com/nova/cordova/alipay/Pgalipay.java" target-dir="src/com/nova/cordova/alipay" />
         <source-file src="src/android/com/nova/cordova/alipay/Result.java" target-dir="src/com/nova/cordova/alipay" />
         <source-file src="src/android/com/nova/cordova/alipay/SignUtils.java" target-dir="src/com/nova/cordova/alipay" />
