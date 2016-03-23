@@ -13,7 +13,7 @@ module.exports = function(context) {
  	var alipayPath = context.opts.projectRoot + '/platforms/android/com/nova/cordova/alipay';
  	var alipayKeysPath = alipayPath + '/Keys.java';
 
- 	fs.readFile(context.opts.projectRoot + '/plugins/com.nova.cordova.alipay/src/com/nova/cordova/alipay/Keys.java', 'utf8', function(err, data) {
+ 	fs.readFile(context.opts.projectRoot + '/plugins/com.nova.cordova.alipay/src/android/com/nova/cordova/alipay/Keys.java', 'utf8', function(err, data) {
  		if(err) throw err;
  		var result = data.replace(/\$PARTNER/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].PARTNER);
  		result = data.replace(/\$SELLER/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].SELLER);
