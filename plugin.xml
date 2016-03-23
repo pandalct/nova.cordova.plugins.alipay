@@ -13,7 +13,7 @@
     <engines>
         <engine name="cordova" version=">=3.5.0" />
     </engines>
-    <js-module src="www/alipay.js" name="alipay">
+    <js-module src="www/pgalipay.js" name="alipay">
         <clobbers target="alipay" />
     </js-module>
     <platform name="android">
