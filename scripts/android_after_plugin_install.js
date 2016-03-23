@@ -8,13 +8,17 @@ module.exports = function(context) {
     var cfg = new ConfigParser(xml);
 
  	var packageName = cfg.packageName();
- 	console.log(cfg,packageName);
+ 	var androidJSON = JSON.parse(fs.readFileSync(context.opts.projectRoot + 'plugins/android.json'));
+ 	console.log(androidJSON);
  	var alipayPath = context.opts.projectRoot + '/platforms/android/com/nova/cordova/alipay';
  	var alipayKeysPath = alipayPath + '/Base64.java';
 
- 	fs.readFile(context.opts.projectRoot + '/src/com/nova/cordova/Keys.java', 'utf8', function(err, data) {
+ 	fs.readFile(context.opts.projectRoot + '/src/com/nova/cordova/alipay/Keys.java', 'utf8', function(err, data) {
  		if(err) throw err;
- 		var result = data.replace(/PACKAGENAME/g, packageName);
+ 		var result = data.replace(/\$PARTNER/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].PARTNER);
+ 		result = data.replace(/\$SELLER/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].SELLER);
+ 		result = data.replace(/\$PRIVATE/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].PRIVATE);
+ 		result = data.replace(/\$PUBLIC/g, androidJSON.installed_plugins["com.nova.cordova.alipay"].PUBLIC);
  		fs.exists(alipayPath, function(exists) {
  			if(!exists) fs.mkdir(alipayPath);
  			
