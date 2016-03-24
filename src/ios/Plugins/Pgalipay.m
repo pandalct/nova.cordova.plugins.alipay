@@ -8,7 +8,7 @@
 
 #import "Pgalipay.h"
 #import "Order.h"
-#import "DataSigner.h"
+#import "Util/DataSigner.h"
 #import <Cordova/CDVPlugin.h>
 #import <QuartzCore/QuartzCore.h>
 

@@ -54,13 +54,13 @@
                 <param name="ios-package" value="Pgalipay" />
             </feature>
         </config-file>
-        <config-file target="*-Info.plist" parent="/*">
-            <key>NSAppTransportSecurity</key>
+        <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
             <dict>
                 <key>NSAllowsArbitraryLoads</key>
                 <true/>
             </dict>
-            <key>LSApplicationQueriesSchemes</key>
+        </config-file>
+        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
             <array>
                 <string>alipay</string>
                 <string>alipayshare</string>
