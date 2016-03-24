@@ -66,8 +66,8 @@
                 <string>alipayshare</string>
             </array>
         </config-file>
-        <header-file src="src/ios/Plugins/Pgalipay.h"  />
-        <source-file src="src/ios/Plugins/Pgalipay.m"  />
+        <header-file src="src/ios/Plugins/Pgalipay.h" />
+        <source-file src="src/ios/Plugins/Pgalipay.m" />
         <!-- Other required frameworks -->
         <framework src="libc++.tbd" />
         <framework src="libz.tbd" />
@@ -88,16 +88,14 @@
         <framework src="CoreText.framework" />
         <framework src="libsqlite3.dylib" />
         <framework src="ImageIO.framework" />
-        
         <source-file src="src/ios/AlipaySDK.bundle" />
         <source-file src="src/ios/alipay/openssl" />
         <source-file src="src/ios/alipay/Util" />
-
         <framework src="src/ios/AlipaySDK.framework" custom="true" />
         <!-- Wechat Official -->
-
-        <header-file src="src/ios/alipay/Order.h"  />
-        <source-file src="src/ios/alipay/Order.m"  />
-
+        <header-file src="src/ios/alipay/Order.h" />
+        <source-file src="src/ios/alipay/Order.m" />
+        <source-file src="src/ios/libcrypto.a" />
+        <source-file src="src/ios/libss.a" />
     </platform>
 </plugin>
