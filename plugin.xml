@@ -8,7 +8,6 @@
     <preference name="SELLER" />
     <preference name="PRIVATE" />
     <preference name="PUBLIC" />
-
     <!--require cordova version -->
     <engines>
         <engine name="cordova" version=">=3.5.0" />
@@ -30,7 +29,6 @@
             <uses-permission android:name="android.permission.READ_PHONE_STATE" />
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
             <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-            
             <!-- alipay sdk end -->
         </config-file>
         <!-- Plugin Source -->
@@ -49,138 +47,146 @@
         <source-file src="src/android/com/nova/cordova/alipay/Pgalipay.java" target-dir="src/com/nova/cordova/alipay" />
         <source-file src="src/android/com/nova/cordova/alipay/Result.java" target-dir="src/com/nova/cordova/alipay" />
         <source-file src="src/android/com/nova/cordova/alipay/SignUtils.java" target-dir="src/com/nova/cordova/alipay" />
-        
     </platform>
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="alipay">
-                <param name="ios-package" value="alipay" />
+            <feature name="Pgalipay">
+                <param name="ios-package" value="Pgalipay" />
             </feature>
-            <preference name="alipayAPPKEY" value="$alipay_IOS_APPKEY" />
-            <preference name="WECHATAPPID" value="$WECHATAPPID" />
-            <preference name="WECHATAPPSECRET" value="$WECHATAPPSECRET" />
-            <preference name="QQAPPID" value="$QQAPPID" />
-            <preference name="QQAPPKEY" value="$QQAPPKEY" />
-            <preference name="QQURLSCHEME" value="$QQURLSCHEME" />
-            <preference name="WBAPPKEY" value="$WBAPPKEY" />
-            <preference name="WBAPPSECRET" value="$WBAPPSECRET" />
-            <preference name="WBREDIRECTURL" value="$WBREDIRECTURL" />
         </config-file>
-        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+        <config-file target="*-Info.plist" parent="/*">
+            <key>NSAppTransportSecurity</key>
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+            </dict>
+            <key>LSApplicationQueriesSchemes</key>
             <array>
-                <dict>
-                    <key>CFBundleTypeRole</key>
-                    <string>Editor</string>
-                    <key>CFBundleURLName</key>
-                    <string></string>
-                    <key>CFBundleURLSchemes</key>
-                    <array>
-                        <string>$WECHATAPPID</string>
-                    </array>
-                </dict>
-                <dict>
-                    <key>CFBundleTypeRole</key>
-                    <string>Editor</string>
-                    <key>CFBundleURLName</key>
-                    <string></string>
-                    <key>CFBundleURLSchemes</key>
-                    <array>
-                        <string>wb$WBAPPKEY</string>
-                    </array>
-                </dict>
-                <dict>
-                    <key>CFBundleTypeRole</key>
-                    <string>Editor</string>
-                    <key>CFBundleURLName</key>
-                    <string></string>
-                    <key>CFBundleURLSchemes</key>
-                    <array>
-                        <string>tencent$QQAPPID</string>
-                    </array>
-                </dict>
-                <dict>
-                    <key>CFBundleTypeRole</key>
-                    <string>Editor</string>
-                    <key>CFBundleURLName</key>
-                    <string></string>
-                    <key>CFBundleURLSchemes</key>
-                    <array>
-                        <string>$QQURLSCHEME</string>
-                    </array>
-                </dict>
+                <string>alipay</string>
+                <string>alipayshare</string>
             </array>
         </config-file>
-        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
-            <array>
-                <string>weixin</string>
-                <string>wechat</string>
-                <string>mqqOpensdkSSoLogin</string>
-                <string>mqqopensdkapiV2</string>
-                <string>mqqopensdkapiV3</string>
-                <string>wtloginmqq2</string>
-                <string>mqq</string>
-                <string>mqqapi</string>
-                <string>mqzoneopensdk</string>
-                <string>mqzoneopensdkapi</string>
-                <string>mqzoneopensdkapi19</string>
-                <string>mqqwpa</string>
-                <string>mqzone</string>
-                <string>sinaweibo</string>
-                <string>sinaweibohd</string>
-                <string>sinaweibosso</string>
-                <string>sinaweibohdsso</string>
-                <string>weibosdk</string>
-                <string>weibosdk2.5</string>
-            </array>
-        </config-file>
-        <header-file src="src/ios/alipay.h" />
-        <source-file src="src/ios/alipay.m" />
+        <header-file src="src/ios/Plugins/Pgalipay.h" />
+        <source-file src="src/ios/Plugins/Pgalipay.m" />
         <!-- Other required frameworks -->
-        <framework src="libz.1.2.5.dylib" />
-        <framework src="MessageUI.framework" />
+        <framework src="libc++.tbd" />
+        <framework src="libz.tbd" />
         <framework src="SystemConfiguration.framework" />
         <framework src="Security.framework" />
-        <framework src="libstdc++.dylib" />
+        <framework src="CoreTelephony.framework" />
         <framework src="QuartzCore.framework" />
+        <framework src="CoreText.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="UIKit.framework" />
+        <framework src="CFNetwork.framework" />
+        <framework src="Foundation.framework" />
+        <framework src="CoreMotion.framework" />
+        <framework src="CoreTelephony.framework" />
         <framework src="CoreTelephony.framework" />
         <framework src="libicucore.dylib" />
         <framework src="JavaScriptCore.framework" />
         <framework src="CoreText.framework" />
         <framework src="libsqlite3.dylib" />
         <framework src="ImageIO.framework" />
+        <framework src="src/ios/AlipaySDK.framework" />
+        <resource-file src="src/ios/AlipaySDK/AlipaySDK.bundle" />
         <!-- Wechat Official -->
-        <header-file src="src/ios/alipay/Extend/WeChatSDK/WXApi.h" />
-        <header-file src="src/ios/alipay/Extend/WeChatSDK/WXApiObject.h" />
-        <source-file src="src/ios/alipay/Extend/WeChatSDK/libWeChatSDK.a" framework="true" />
-        <resource-file src="src/ios/alipay/Extend/QQConnectSDK/TencentOpenApi_IOS_Bundle.bundle" />
-        <!-- Sina Official -->
-        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WeiboSDK.h" />
-        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WeiboUser.h" />
-        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WeiboSDK+Statistics.h" />
-        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBSDKRelationshipButton.h" />
-        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBSDKCommentButton.h" />
-        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBSDKBasicButton.h" />
-        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBHttpRequest.h" />
-        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBHttpRequest+WeiboUser.h" />
-        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBHttpRequest+WeiboToken.h" />
-        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBHttpRequest+WeiboShare.h" />
-        <header-file src="src/ios/alipay/Extend/SinaWeiboSDK/WBHttpRequest+WeiboGame.h" />
-        <source-file src="src/ios/alipay/Extend/SinaWeiboSDK/libWeiboSDK.a" framework="true" />
-        <resource-file src="src/ios/alipay/Extend/SinaWeiboSDK/WeiboSDK.bundle" />
-        <!-- alipay -->
-        <framework src="src/ios/alipay/alipay.framework" custom="true" />
-        <framework src="src/ios/alipay/Connection/QQConnection.framework" custom="true" />
-        <framework src="src/ios/alipay/Connection/QZoneConnection.framework" custom="true" />
-        <framework src="src/ios/alipay/Connection/SinaWeiboConnection.framework" custom="true" />
-        <framework src="src/ios/alipay/Connection/WeChatConnection.framework" custom="true" />
-        <framework src="src/ios/alipay/Core/alipayCoreService.framework" custom="true" />
-        <framework src="src/ios/alipay/Core/AGCommon.framework" custom="true" />
-        <framework src="src/ios/alipay/Core/MOBFoundation.framework" custom="true" />
-        <resource-file src="src/ios/alipay/UI/alipayFlatShareViewUI.bundle" />
-        <resource-file src="src/ios/alipay/Core/zh-Hans.lproj/alipayLocalizable.strings" />
-        <resource-file src="src/ios/alipay/Core/Resource.bundle" />
-        <framework src="src/ios/alipay/UI/alipayShareActionSheet.framework" custom="true" />
-        <framework src="src/ios/alipay/UI/alipayFlatShareViewUI.framework" custom="true" />
-        <framework src="src/ios/alipay/Extend/QQConnectSDK/TencentOpenAPI.framework" custom="true" />
+        <header-file src="src/ios/alipay/openssl/aes.h" />
+        <header-file src="src/ios/alipay/openssl/asn1.h" />
+        <header-file src="src/ios/alipay/openssl/asn1_mac.h" />
+        <header-file src="src/ios/alipay/openssl/asn1t.h" />
+        <header-file src="src/ios/alipay/openssl/bio.h" />
+        <header-file src="src/ios/alipay/openssl/blowfish.h" />
+        <header-file src="src/ios/alipay/openssl/bn.h" />
+        <header-file src="src/ios/alipay/openssl/buffer.h" />
+        <header-file src="src/ios/alipay/openssl/camellia.h" />
+        <header-file src="src/ios/alipay/openssl/cast.h" />
+        <header-file src="src/ios/alipay/openssl/cmac.h" />
+        <header-file src="src/ios/alipay/openssl/cms.h" />
+        <header-file src="src/ios/alipay/openssl/comp.h" />
+        <header-file src="src/ios/alipay/openssl/conf.h" />
+        <header-file src="src/ios/alipay/openssl/conf_api.h" />
+        <header-file src="src/ios/alipay/openssl/crypto.h" />
+        <header-file src="src/ios/alipay/openssl/des.h" />
+        <header-file src="src/ios/alipay/openssl/des_old.h" />
+        <header-file src="src/ios/alipay/openssl/dh.h" />
+        <header-file src="src/ios/alipay/openssl/dsa.h" />
+        <header-file src="src/ios/alipay/openssl/dso.h" />
+        <header-file src="src/ios/alipay/openssl/dtls1.h" />
+        <header-file src="src/ios/alipay/openssl/e_os2.h" />
+        <header-file src="src/ios/alipay/openssl/ebcdic.h" />
+        <header-file src="src/ios/alipay/openssl/ec.h" />
+        <header-file src="src/ios/alipay/openssl/ecdh.h" />
+        <header-file src="src/ios/alipay/openssl/ecdsa.h" />
+        <header-file src="src/ios/alipay/openssl/engine.h" />
+        <header-file src="src/ios/alipay/openssl/err.h" />
+        <header-file src="src/ios/alipay/openssl/evp.h" />
+        <header-file src="src/ios/alipay/openssl/hmac.h" />
+        <header-file src="src/ios/alipay/openssl/idea.h" />
+        <header-file src="src/ios/alipay/openssl/krb5_asn.h" />
+        <header-file src="src/ios/alipay/openssl/kssl.h" />
+        <header-file src="src/ios/alipay/openssl/lhash.h" />
+        <header-file src="src/ios/alipay/openssl/md4.h" />
+        <header-file src="src/ios/alipay/openssl/md5.h" />
+        <header-file src="src/ios/alipay/openssl/mdc2.h" />
+        <header-file src="src/ios/alipay/openssl/modes.h" />
+        <header-file src="src/ios/alipay/openssl/obj_mac.h" />
+        <header-file src="src/ios/alipay/openssl/objects.h" />
+        <header-file src="src/ios/alipay/openssl/ocsp.h" />
+        <header-file src="src/ios/alipay/openssl/opensslconf.h" />
+        <header-file src="src/ios/alipay/openssl/opensslv.h" />
+        <header-file src="src/ios/alipay/openssl/ossl_type.h" />
+        <header-file src="src/ios/alipay/openssl/pem.h" />
+        <header-file src="src/ios/alipay/openssl/pem2.h" />
+        <header-file src="src/ios/alipay/openssl/pkcs12.h" />
+        <header-file src="src/ios/alipay/openssl/pkcs7.h" />
+        <header-file src="src/ios/alipay/openssl/pqueue.h" />
+        <header-file src="src/ios/alipay/openssl/rand.h" />
+        <header-file src="src/ios/alipay/openssl/rc2.h" />
+        <header-file src="src/ios/alipay/openssl/rc4.h" />
+        <header-file src="src/ios/alipay/openssl/ripemd.h" />
+        <header-file src="src/ios/alipay/openssl/rsa.h" />
+        <header-file src="src/ios/alipay/openssl/safestack.h" />
+        <header-file src="src/ios/alipay/openssl/seed.h" />
+        <header-file src="src/ios/alipay/openssl/sha.h" />
+        <header-file src="src/ios/alipay/openssl/srp.h" />
+        <header-file src="src/ios/alipay/openssl/srtp.h" />
+        <header-file src="src/ios/alipay/openssl/ssl.h" />
+        <header-file src="src/ios/alipay/openssl/ssl2.h" />
+        <header-file src="src/ios/alipay/openssl/ssl23.h" />
+        <header-file src="src/ios/alipay/openssl/ssl3.h" />
+        <header-file src="src/ios/alipay/openssl/stack.h" />
+        <header-file src="src/ios/alipay/openssl/symhacks.h" />
+        <header-file src="src/ios/alipay/openssl/tls1.h" />
+        <header-file src="src/ios/alipay/openssl/ts.h" />
+        <header-file src="src/ios/alipay/openssl/txt_db.h" />
+        <header-file src="src/ios/alipay/openssl/ui.h" />
+        <header-file src="src/ios/alipay/openssl/ui_compat.h" />
+        <header-file src="src/ios/alipay/openssl/whrlpool.h" />
+        <header-file src="src/ios/alipay/openssl/x509.h" />
+        <header-file src="src/ios/alipay/openssl/x509_vfy.h" />
+        <header-file src="src/ios/alipay/openssl/x509v3.h" />
+        <header-file src="src/ios/alipay/openssl/buffer.h" />
+        <header-file src="src/ios/alipay/openssl/buffer.h" />
+        <header-file src="src/ios/alipay/openssl/buffer.h" />
+        <header-file src="src/ios/alipay/Order.h" />
+        <source-file src="src/ios/alipay/Order.m" />
+        <header-file src="src/ios/alipay/Util/base64.h" />
+        <source-file src="src/ios/alipay/Util/base64.m" />
+        <header-file src="src/ios/alipay/Util/config.h" />
+        <header-file src="src/ios/alipay/Util/DataSigner.h" />
+        <source-file src="src/ios/alipay/Util/DataSigner.m" />
+        <header-file src="src/ios/alipay/Util/DataVerifier.h" />
+        <source-file src="src/ios/alipay/Util/DataVerifier.m" />
+        <header-file src="src/ios/alipay/Util/MD5DataSigner.h" />
+        <source-file src="src/ios/alipay/Util/MD5DataSigner.m" />
+        <header-file src="src/ios/alipay/Util/NSDataEx.h" />
+        <source-file src="src/ios/alipay/Util/NSDataEx.m" />
+        <header-file src="src/ios/alipay/Util/openssl_wrapper.h" />
+        <source-file src="src/ios/alipay/Util/openssl_wrapper.m" />
+        <header-file src="src/ios/alipay/Util/RSADataSigner.h" />
+        <source-file src="src/ios/alipay/Util/RSADataSigner.m" />
+        <header-file src="src/ios/alipay/Util/RSADataVerifier.h" />
+        <source-file src="src/ios/alipay/Util/RSADataVerifier.m" />
     </platform>
 </plugin>
