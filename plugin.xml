@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin id="com.nova.cordova.alipay" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="nova.cordova.plugins.alipay" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>alipay</name>
     <description>alipay</description>
     <!-- add this to your config.xml -->
@@ -13,7 +13,7 @@
     <engines>
         <engine name="cordova" version=">=3.5.0" />
     </engines>
-    <js-module src="www/pgalipay.js" name="alipay">
+    <js-module src="pgalipay.js" name="alipay">
         <clobbers target="alipay" />
     </js-module>
     <platform name="android">
@@ -34,7 +34,6 @@
             <!-- alipay sdk end -->
         </config-file>
         <!-- Plugin Source -->
-        <source-file src="www/pgalipay.js" target-dir="src/assets" />
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <!-- alipay sdk begin -->
             <activity android:name="com.alipay.sdk.app.H5PayActivity" android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:screenOrientation="behind">
@@ -46,6 +45,7 @@
         <lib-file src="src/android/alipay/libs/alipaySdk-20151112.jar" />
         <!-- alipay Sources -->
         <source-file src="src/android/com/nova/cordova/alipay/Base64.java" target-dir="src/com/nova/cordova/alipay" />
+        <source-file src="src/android/com/nova/cordova/alipay/Keys.java" target-dir="src/com/nova/cordova/alipay" />
         <source-file src="src/android/com/nova/cordova/alipay/Pgalipay.java" target-dir="src/com/nova/cordova/alipay" />
         <source-file src="src/android/com/nova/cordova/alipay/Result.java" target-dir="src/com/nova/cordova/alipay" />
         <source-file src="src/android/com/nova/cordova/alipay/SignUtils.java" target-dir="src/com/nova/cordova/alipay" />
