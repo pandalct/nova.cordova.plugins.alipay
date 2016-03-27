@@ -7,16 +7,18 @@
     <preference name="PARTNER" />
     <preference name="SELLER" />
     <preference name="PRIVATE" />
-    <preference name="PUBLIC" />
+    <preference name="PUBLIC" default=" "/>
+    <preference name="SCHEME" default=" "/>
     <!--require cordova version -->
     <engines>
         <engine name="cordova" version=">=3.5.0" />
     </engines>
-    <js-module src="pgalipay.js" name="alipay">
-        <clobbers target="alipay" />
-    </js-module>
+    
     <platform name="android">
         <hook type="after_plugin_install" src="scripts/android_after_plugin_install.js" />
+        <js-module src="src/android/pgalipay.js" name="alipay">
+            <clobbers target="alipay" />
+        </js-module>
         <config-file target="config.xml" parent="/*">
             <feature name="Pgalipay">
                 <param name="android-package" value="com.nova.cordova.alipay.Pgalipay" />
@@ -49,18 +51,19 @@
         <source-file src="src/android/com/nova/cordova/alipay/SignUtils.java" target-dir="src/com/nova/cordova/alipay" />
     </platform>
     <platform name="ios">
+        <hook type="after_plugin_install" src="scripts/ios_after_plugin_install.js" />
+        <js-module src="src/ios/pgalipay.js" name="alipay">
+            <clobbers target="alipay" />
+        </js-module>
         <config-file target="config.xml" parent="/*">
             <feature name="Pgalipay">
                 <param name="ios-package" value="Pgalipay" />
             </feature>
         </config-file>
-        <config-file target="*-Info.plist" parent="/*">
-            <key>NSAppTransportSecurity</key>
-            <dict>
-                <key>NSAllowsArbitraryLoads</key>
+        <config-file target="*-Info.plist" parent="NSAppTransportSecurity.NSAllowsArbitraryLoads">
                 <true/>
-            </dict>
-            <key>LSApplicationQueriesSchemes</key>
+        </config-file>
+        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
             <array>
                 <string>alipay</string>
                 <string>alipayshare</string>
@@ -68,9 +71,10 @@
         </config-file>
         <header-file src="src/ios/Plugins/Pgalipay.h" />
         <source-file src="src/ios/Plugins/Pgalipay.m" />
+        <header-file src="src/ios/Classes/Order.h" />
+        <source-file src="src/ios/Classes/Order.m" />
         <!-- Other required frameworks -->
-        <framework src="libc++.tbd" />
-        <framework src="libz.tbd" />
+
         <framework src="SystemConfiguration.framework" />
         <framework src="Security.framework" />
         <framework src="CoreTelephony.framework" />
@@ -83,110 +87,17 @@
         <framework src="CoreMotion.framework" />
         <framework src="CoreTelephony.framework" />
         <framework src="CoreTelephony.framework" />
-        <framework src="libicucore.dylib" />
         <framework src="JavaScriptCore.framework" />
         <framework src="CoreText.framework" />
-        <framework src="libsqlite3.dylib" />
         <framework src="ImageIO.framework" />
-        <framework src="src/ios/AlipaySDK.framework" />
-        <resource-file src="src/ios/AlipaySDK/AlipaySDK.bundle" />
-        <!-- Wechat Official -->
-        <header-file src="src/ios/alipay/openssl/aes.h" />
-        <header-file src="src/ios/alipay/openssl/asn1.h" />
-        <header-file src="src/ios/alipay/openssl/asn1_mac.h" />
-        <header-file src="src/ios/alipay/openssl/asn1t.h" />
-        <header-file src="src/ios/alipay/openssl/bio.h" />
-        <header-file src="src/ios/alipay/openssl/blowfish.h" />
-        <header-file src="src/ios/alipay/openssl/bn.h" />
-        <header-file src="src/ios/alipay/openssl/buffer.h" />
-        <header-file src="src/ios/alipay/openssl/camellia.h" />
-        <header-file src="src/ios/alipay/openssl/cast.h" />
-        <header-file src="src/ios/alipay/openssl/cmac.h" />
-        <header-file src="src/ios/alipay/openssl/cms.h" />
-        <header-file src="src/ios/alipay/openssl/comp.h" />
-        <header-file src="src/ios/alipay/openssl/conf.h" />
-        <header-file src="src/ios/alipay/openssl/conf_api.h" />
-        <header-file src="src/ios/alipay/openssl/crypto.h" />
-        <header-file src="src/ios/alipay/openssl/des.h" />
-        <header-file src="src/ios/alipay/openssl/des_old.h" />
-        <header-file src="src/ios/alipay/openssl/dh.h" />
-        <header-file src="src/ios/alipay/openssl/dsa.h" />
-        <header-file src="src/ios/alipay/openssl/dso.h" />
-        <header-file src="src/ios/alipay/openssl/dtls1.h" />
-        <header-file src="src/ios/alipay/openssl/e_os2.h" />
-        <header-file src="src/ios/alipay/openssl/ebcdic.h" />
-        <header-file src="src/ios/alipay/openssl/ec.h" />
-        <header-file src="src/ios/alipay/openssl/ecdh.h" />
-        <header-file src="src/ios/alipay/openssl/ecdsa.h" />
-        <header-file src="src/ios/alipay/openssl/engine.h" />
-        <header-file src="src/ios/alipay/openssl/err.h" />
-        <header-file src="src/ios/alipay/openssl/evp.h" />
-        <header-file src="src/ios/alipay/openssl/hmac.h" />
-        <header-file src="src/ios/alipay/openssl/idea.h" />
-        <header-file src="src/ios/alipay/openssl/krb5_asn.h" />
-        <header-file src="src/ios/alipay/openssl/kssl.h" />
-        <header-file src="src/ios/alipay/openssl/lhash.h" />
-        <header-file src="src/ios/alipay/openssl/md4.h" />
-        <header-file src="src/ios/alipay/openssl/md5.h" />
-        <header-file src="src/ios/alipay/openssl/mdc2.h" />
-        <header-file src="src/ios/alipay/openssl/modes.h" />
-        <header-file src="src/ios/alipay/openssl/obj_mac.h" />
-        <header-file src="src/ios/alipay/openssl/objects.h" />
-        <header-file src="src/ios/alipay/openssl/ocsp.h" />
-        <header-file src="src/ios/alipay/openssl/opensslconf.h" />
-        <header-file src="src/ios/alipay/openssl/opensslv.h" />
-        <header-file src="src/ios/alipay/openssl/ossl_type.h" />
-        <header-file src="src/ios/alipay/openssl/pem.h" />
-        <header-file src="src/ios/alipay/openssl/pem2.h" />
-        <header-file src="src/ios/alipay/openssl/pkcs12.h" />
-        <header-file src="src/ios/alipay/openssl/pkcs7.h" />
-        <header-file src="src/ios/alipay/openssl/pqueue.h" />
-        <header-file src="src/ios/alipay/openssl/rand.h" />
-        <header-file src="src/ios/alipay/openssl/rc2.h" />
-        <header-file src="src/ios/alipay/openssl/rc4.h" />
-        <header-file src="src/ios/alipay/openssl/ripemd.h" />
-        <header-file src="src/ios/alipay/openssl/rsa.h" />
-        <header-file src="src/ios/alipay/openssl/safestack.h" />
-        <header-file src="src/ios/alipay/openssl/seed.h" />
-        <header-file src="src/ios/alipay/openssl/sha.h" />
-        <header-file src="src/ios/alipay/openssl/srp.h" />
-        <header-file src="src/ios/alipay/openssl/srtp.h" />
-        <header-file src="src/ios/alipay/openssl/ssl.h" />
-        <header-file src="src/ios/alipay/openssl/ssl2.h" />
-        <header-file src="src/ios/alipay/openssl/ssl23.h" />
-        <header-file src="src/ios/alipay/openssl/ssl3.h" />
-        <header-file src="src/ios/alipay/openssl/stack.h" />
-        <header-file src="src/ios/alipay/openssl/symhacks.h" />
-        <header-file src="src/ios/alipay/openssl/tls1.h" />
-        <header-file src="src/ios/alipay/openssl/ts.h" />
-        <header-file src="src/ios/alipay/openssl/txt_db.h" />
-        <header-file src="src/ios/alipay/openssl/ui.h" />
-        <header-file src="src/ios/alipay/openssl/ui_compat.h" />
-        <header-file src="src/ios/alipay/openssl/whrlpool.h" />
-        <header-file src="src/ios/alipay/openssl/x509.h" />
-        <header-file src="src/ios/alipay/openssl/x509_vfy.h" />
-        <header-file src="src/ios/alipay/openssl/x509v3.h" />
-        <header-file src="src/ios/alipay/openssl/buffer.h" />
-        <header-file src="src/ios/alipay/openssl/buffer.h" />
-        <header-file src="src/ios/alipay/openssl/buffer.h" />
-        <header-file src="src/ios/alipay/Order.h" />
-        <source-file src="src/ios/alipay/Order.m" />
-        <header-file src="src/ios/alipay/Util/base64.h" />
-        <source-file src="src/ios/alipay/Util/base64.m" />
-        <header-file src="src/ios/alipay/Util/config.h" />
-        <header-file src="src/ios/alipay/Util/DataSigner.h" />
-        <source-file src="src/ios/alipay/Util/DataSigner.m" />
-        <header-file src="src/ios/alipay/Util/DataVerifier.h" />
-        <source-file src="src/ios/alipay/Util/DataVerifier.m" />
-        <header-file src="src/ios/alipay/Util/MD5DataSigner.h" />
-        <source-file src="src/ios/alipay/Util/MD5DataSigner.m" />
-        <header-file src="src/ios/alipay/Util/NSDataEx.h" />
-        <source-file src="src/ios/alipay/Util/NSDataEx.m" />
-        <header-file src="src/ios/alipay/Util/openssl_wrapper.h" />
-        <source-file src="src/ios/alipay/Util/openssl_wrapper.m" />
-        <header-file src="src/ios/alipay/Util/RSADataSigner.h" />
-        <source-file src="src/ios/alipay/Util/RSADataSigner.m" />
-        <header-file src="src/ios/alipay/Util/RSADataVerifier.h" />
-        <source-file src="src/ios/alipay/Util/RSADataVerifier.m" />
+        <framework src="libz.tbd" framework="true" weak="true"/>
+        <framework src="libc++.tbd" framework="true" weak="true"/>
+        <framework src="libstdc++.6.0.9.tbd" framework="true" weak="true"/>
+        <framework src="src/ios/root/AlipaySDK.framework" custom="true" /> 
+        <resource-file src="src/ios/root/AlipaySDK.bundle" /> 
+        <!-- <lib-file src="src/ios/root/libcrypto.a" arch="x86" /> -->
+
+        <framework src="src/ios/root/libcrypto.a" custom="true"/> 
+        <framework src="src/ios/root/libssl.a" custom="true"/> 
     </platform>
 </plugin>

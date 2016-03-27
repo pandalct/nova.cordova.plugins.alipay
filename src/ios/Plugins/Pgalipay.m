@@ -37,7 +37,7 @@
     NSString *privateKey = @"$PRIVATE";
     /*============================================================================*/
     //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-	NSString *appScheme = @"$Scheme";
+	NSString *appScheme = @"$SCHEME";
 	
 	//partner和seller获取失败,提示
 	if ([partner length] == 0 || [seller length] == 0)
