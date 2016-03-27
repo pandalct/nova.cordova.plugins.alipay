@@ -23,11 +23,7 @@ cordova.define("cordova/plugins/Pgalipay",
                 console.log("pgbaidumap.scan failure: success callback parameter must be a function");
                 return
             }
-            if (device.platform == 'Android') {
-                exec(successCallback, errorCallback, 'Pgalipay', 'alipay', [{ "out_trade_no": out_trade_no, "subject": subject, "bodtxt": bodtxt, "total_fee": total_fee }]);
-            } else if (device.platform == 'iOS') {
-                exec(successCallback, errorCallback, 'Pgalipay', 'alipay', [out_trade_no, subject, bodtxt, total_fee, url]);
-            }
+            exec(successCallback, errorCallback, 'Pgalipay', 'alipay', [{ "out_trade_no": out_trade_no, "subject": subject, "bodtxt": bodtxt, "total_fee": total_fee }]);
 
         };
 

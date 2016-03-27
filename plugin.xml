@@ -7,16 +7,18 @@
     <preference name="PARTNER" />
     <preference name="SELLER" />
     <preference name="PRIVATE" />
-    <preference name="PUBLIC" />
+    <preference name="PUBLIC" default=" "/>
+    <preference name="SCHEME" default=" "/>
     <!--require cordova version -->
     <engines>
         <engine name="cordova" version=">=3.5.0" />
     </engines>
-    <js-module src="pgalipay.js" name="alipay">
-        <clobbers target="alipay" />
-    </js-module>
+    
     <platform name="android">
         <hook type="after_plugin_install" src="scripts/android_after_plugin_install.js" />
+        <js-module src="src/android/pgalipay.js" name="alipay">
+            <clobbers target="alipay" />
+        </js-module>
         <config-file target="config.xml" parent="/*">
             <feature name="Pgalipay">
                 <param name="android-package" value="com.nova.cordova.alipay.Pgalipay" />
@@ -49,16 +51,17 @@
         <source-file src="src/android/com/nova/cordova/alipay/SignUtils.java" target-dir="src/com/nova/cordova/alipay" />
     </platform>
     <platform name="ios">
+        <hook type="after_plugin_install" src="scripts/ios_after_plugin_install.js" />
+        <js-module src="src/ios/pgalipay.js" name="alipay">
+            <clobbers target="alipay" />
+        </js-module>
         <config-file target="config.xml" parent="/*">
             <feature name="Pgalipay">
                 <param name="ios-package" value="Pgalipay" />
             </feature>
         </config-file>
-        <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
-            <dict>
-                <key>NSAllowsArbitraryLoads</key>
+        <config-file target="*-Info.plist" parent="NSAppTransportSecurity.NSAllowsArbitraryLoads">
                 <true/>
-            </dict>
         </config-file>
         <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
             <array>
@@ -68,9 +71,10 @@
         </config-file>
         <header-file src="src/ios/Plugins/Pgalipay.h" />
         <source-file src="src/ios/Plugins/Pgalipay.m" />
+        <header-file src="src/ios/Classes/Order.h" />
+        <source-file src="src/ios/Classes/Order.m" />
         <!-- Other required frameworks -->
-        <framework src="libc++.tbd" />
-        <framework src="libz.tbd" />
+
         <framework src="SystemConfiguration.framework" />
         <framework src="Security.framework" />
         <framework src="CoreTelephony.framework" />
@@ -83,19 +87,17 @@
         <framework src="CoreMotion.framework" />
         <framework src="CoreTelephony.framework" />
         <framework src="CoreTelephony.framework" />
-        <framework src="libicucore.dylib" />
         <framework src="JavaScriptCore.framework" />
         <framework src="CoreText.framework" />
-        <framework src="libsqlite3.dylib" />
         <framework src="ImageIO.framework" />
-        <source-file src="src/ios/AlipaySDK.bundle" />
-        <source-file src="src/ios/alipay/openssl" />
-        <source-file src="src/ios/alipay/Util" />
-        <framework src="src/ios/AlipaySDK.framework" custom="true" />
-        <!-- Wechat Official -->
-        <header-file src="src/ios/alipay/Order.h" />
-        <source-file src="src/ios/alipay/Order.m" />
-        <source-file src="src/ios/libcrypto.a" />
-        <source-file src="src/ios/libss.a" />
+        <framework src="libz.tbd" framework="true" weak="true"/>
+        <framework src="libc++.tbd" framework="true" weak="true"/>
+        <framework src="libstdc++.6.0.9.tbd" framework="true" weak="true"/>
+        <framework src="src/ios/root/AlipaySDK.framework" custom="true" /> 
+        <resource-file src="src/ios/root/AlipaySDK.bundle" /> 
+        <!-- <lib-file src="src/ios/root/libcrypto.a" arch="x86" /> -->
+
+        <framework src="src/ios/root/libcrypto.a" custom="true"/> 
+        <framework src="src/ios/root/libssl.a" custom="true"/> 
     </platform>
 </plugin>
